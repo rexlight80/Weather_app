@@ -6,7 +6,7 @@ import { useTheme } from "./ThemeProvider"
 type Props = {}
 
 export default function LightDarkToggle({}: Props) {
-  const { theme, toggleTheme } = useTheme()
+  const { theme, toggleTheme } = useTheme();
   return (
     <div className="flex items-center gap-2">
       <Sun className="size-5" />

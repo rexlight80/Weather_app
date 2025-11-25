@@ -3,6 +3,7 @@ import "leaflet/dist/leaflet.css"
 import type { Coords } from "../types"
 import { useEffect } from "react";
 import {MaptilerLayer} from "@maptiler/leaflet-maptilersdk"
+import { useTheme } from "./ThemeProvider";
 
 const API_KEY = import.meta.env.VITE_API_KEY;
 
@@ -13,7 +14,8 @@ type Props = {
 }
 
 export default function Map({coords ,onMapClick, mapType}: Props) {
-    const {lat, lon} = coords
+    const {lat, lon} = coords;
+    
   return (
     <MapContainer 
        center={[lat, lon]} 
@@ -51,10 +53,11 @@ function MapClick({
 
 function MapTileLayer() {
   const map = useMap()
-
+  const { theme } = useTheme();
+console.log('Theme', theme)
   useEffect(() => {
     const tileLayer = new MaptilerLayer({
-      style: "basic-dark",
+      style: `basic-${theme}`,
       apiKey: "Dii9xleDA5L79S0k29kg",
     })
     tileLayer.addTo(map)
@@ -62,7 +65,7 @@ function MapTileLayer() {
     return () => {
       map.removeLayer(tileLayer)
     }
-  }, [map])
+  }, [map, theme])
 
   return null
 }

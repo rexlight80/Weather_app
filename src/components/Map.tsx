@@ -54,7 +54,7 @@ function MapClick({
 function MapTileLayer() {
   const map = useMap()
   const { theme } = useTheme();
-console.log('Theme', theme)
+  
   useEffect(() => {
     const tileLayer = new MaptilerLayer({
       style: `basic-${theme}`,
